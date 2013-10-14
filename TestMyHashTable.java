@@ -1,10 +1,14 @@
+import java.util.List;
+import java.util.ArrayList;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 
 public class TestMyHashTable {
-    //declare class level variables here
+    static String testdatafile = "testdata.txt";
+    static List<String> testdata = new ArrayList<String>();
     StringBuilder   results;
     BufferedReader  input;
 
@@ -13,29 +17,25 @@ public class TestMyHashTable {
         MyHashTable table = new MyHashTable(120);
 
         //Retrieve command line arguments.
-        if (args.length != 1) {
-            System.out.println("Please Enter:  java fileName [input file pathname]");
-                System.exit(1);
-        }
+        //if (args.length != 1) {
+        //    System.out.println("Please Enter:  java fileName [input file pathname]");
+        //        System.exit(1);
+        //}
 
         StringBuffer sb = new StringBuffer();
 
-        //Open the file that will be used for input.
+        // Read in the test data
         try {
-            BufferedReader input = new BufferedReader(new FileReader(args[0]));
-
-            //read the input line by line and store in string variable
+            BufferedReader input = new BufferedReader(new FileReader(testdatafile));
+            String string;
             while ((string = input.readLine()) != null) {
-                sb.append(string + "\n");
-                data = sb.toString();
-
-                //store each string in an array for later formatting
-                stringArray = data.split("\n");
+                testdata.add(string);
             }
         }
         catch (Exception ioe) {
             System.err.println(ioe.toString());
             return;
         }
+        System.out.println("Read in " + testdata.size() + " test data entries.");
     }
 }
