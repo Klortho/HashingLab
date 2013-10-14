@@ -1,15 +1,13 @@
-public class HashTableImpl implements HashTable {
+public class HashTableOneBucket implements HashTable {
     public HashTableSlot table[];
 
-    public HashTableImpl(int hashFunction, int tableSize, int bucketSize, int collisionResolver) {
+    public HashTableOneBucket(int hashFunction, int tableSize, int collisionResolver) {
         table = new HashTableSlot[tableSize];
         for (int i = 0; i < tableSize; ++i) {
             int next = i == tableSize - 1 ? -1 : i + 1;
-            table[i] = new HashTableSlot(bucketSize, i - 1, next);
+            table[i] = new HashTableSlot(1, i - 1, next);
         }
     }
-
-
 
 
 
@@ -31,28 +29,18 @@ public class HashTableImpl implements HashTable {
         return address;
     }
 
-    public String printArrayTable(Integer [] m) {
+    public String print() {
         StringBuilder results = new StringBuilder();
 
+      /*
         for (int i = 0; i < m.length; i++) {
             if (i % 6 == 0)
                 results.append(i + "\n");
             else
                 results.append(i);
         }
+      */
         return results.toString();
     }
 
-    public String print40Table(Integer [] m) {
-        StringBuilder results2 = new StringBuilder();
-
-        for (int i = 0; i < m.length; i++) {
-            if (i % 4 == 0)
-                results2.append(i + "\n");
-            else
-                results2.append(i);
-        }
-
-        return results2.toString();
-    }
 }
