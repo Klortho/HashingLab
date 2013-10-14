@@ -1,21 +1,24 @@
-public class MyHashTable {
-    Integer [] table;
-    int size;
+public class HashTableImpl implements HashTable {
+    public HashTableSlot table[];
 
-    //a no arg constructor
-    public MyHashTable() {
+    public HashTableImpl(int hashFunction, int tableSize, int bucketSize, int collisionResolver) {
+        table = new HashTableSlot[tableSize];
+        for (int i = 0; i < tableSize; ++i) {
+            int next = i == tableSize - 1 ? -1 : i + 1;
+            table[i] = new HashTableSlot(bucketSize, i - 1, next);
+        }
     }
 
-    public MyHashTable(int size) {
-        table = new Integer [size];
-    }
+
+
+
 
     public void insertLinearProbe(int key, int tableSize) {
         int address = hashFunction(key, tableSize);
         for (int i = 0; i < table.length; i++) {
             address = key + i;
             if (table[address] == null) {
-                table[address] = key;
+                //table[address] = key;
             }
             //keep looking
         }
