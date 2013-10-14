@@ -1,4 +1,4 @@
-//test hash table
+//test hash table - pure Tolstoy
 import java.util.List;
 import java.util.ArrayList;
 
