@@ -1,11 +1,14 @@
-public class HashTableOneBucket implements HashTable {
-    public HashTableSlot table[];
+import java.io.PrintStream;
 
-    public HashTableOneBucket(int hashFunction, int tableSize, int collisionResolver) {
-        table = new HashTableSlot[tableSize];
-        for (int i = 0; i < tableSize; ++i) {
-            int next = i == tableSize - 1 ? -1 : i + 1;
-            table[i] = new HashTableSlot(1, i - 1, next);
+public class HashTableOneBucket implements HashTable {
+    public int tableSize;
+    public int table[];
+
+    public HashTableOneBucket(int hashFunction, int _tableSize, int collisionResolver) {
+        tableSize = _tableSize;
+        table = new int[_tableSize];
+        for (int i = 0; i < _tableSize; ++i) {
+            table[i] = -1;
         }
     }
 
@@ -15,7 +18,7 @@ public class HashTableOneBucket implements HashTable {
         int address = hashFunction(key, tableSize);
         for (int i = 0; i < table.length; i++) {
             address = key + i;
-            if (table[address] == null) {
+            if (table[address] == -1) {
                 //table[address] = key;
             }
             //keep looking
@@ -29,18 +32,15 @@ public class HashTableOneBucket implements HashTable {
         return address;
     }
 
-    public String print() {
-        StringBuilder results = new StringBuilder();
-
-      /*
-        for (int i = 0; i < m.length; i++) {
-            if (i % 6 == 0)
-                results.append(i + "\n");
-            else
-                results.append(i);
+    /**
+      In the cases where we have one bucket / slot, we are supposed to print the table
+      five elements across.
+     */
+    public void print(PrintStream ps) {
+        for (int i = 0; i < tableSize; i++) {
+            ps.format("%6d", table[i]);
+            if (i % 5 == 4) ps.print("\n");
         }
-      */
-        return results.toString();
     }
 
 }

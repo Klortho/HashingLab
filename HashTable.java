@@ -1,3 +1,5 @@
+import java.io.PrintStream;
+
 public interface HashTable {
-    public String print();
+    public void print(PrintStream ps);
 }
