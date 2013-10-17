@@ -9,7 +9,7 @@ import java.io.PrintStream;
 
 public class TestHashTables {
     static String testdatafile = "testdata.txt";
-    static List<String> testdata = new ArrayList<String>();
+    static List<Integer> testdata = new ArrayList<Integer>();
 
     public static void main(String [] args) {
         StringBuffer sb = new StringBuffer();
@@ -19,7 +19,7 @@ public class TestHashTables {
             BufferedReader input = new BufferedReader(new FileReader(testdatafile));
             String string;
             while ((string = input.readLine()) != null) {
-                testdata.add(string);
+                testdata.add(Integer.parseInt(string));
             }
         }
         catch (Exception ioe) {
@@ -30,17 +30,19 @@ public class TestHashTables {
 
 
         run_tests("Division module 120, 120 slots, 1 bucket / slot, linear probing",
-                  new HashTableOneBucket(0, 120, 0));
-        run_tests("Division module 120, 40 slots, 3 bucket / slot, linear probing",
-                  new HashTableMultiBucket(0, 120, 3, 0));
-
-        //declare and initialize a hash table
-        //MyHashTable table = new MyHashTable(120);
+                  new HashTableOneBucket(HashFunction.div_mod_120, 120, 0));
+        //run_tests("Division module 120, 40 slots, 3 bucket / slot, linear probing",
+        //          new HashTableMultiBucket(HashFunction.div_mod_120, 120, 3, 0));
     }
 
     public static void run_tests(String title, HashTable table) {
         System.out.println("======================================================");
         System.out.println(title);
+
+        for (int i = 0; i < testdata.size(); ++i) {
+            table.put(testdata.get(i));
+        }
+
         table.print(System.out);
     }
 }

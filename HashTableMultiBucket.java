@@ -1,12 +1,16 @@
 import java.io.PrintStream;
 
 public class HashTableMultiBucket implements HashTable {
+    public HashFunction hashFunction;
     public int tableSize;
     public int bucketsPerSlot;
     public int numSlots;
     public HashTableSlot table[];
 
-    public HashTableMultiBucket(int hashFunction, int _tableSize, int _bucketsPerSlot, int collisionResolver) {
+    public HashTableMultiBucket(HashFunction _hashFunction, int _tableSize, int _bucketsPerSlot,
+                                int collisionResolver)
+    {
+        hashFunction = _hashFunction;
         tableSize = _tableSize;
         bucketsPerSlot = _bucketsPerSlot;
         numSlots = _tableSize / _bucketsPerSlot;
@@ -16,6 +20,8 @@ public class HashTableMultiBucket implements HashTable {
         }
     }
 
+    public void put(int i) {
+    }
 
 
     /**

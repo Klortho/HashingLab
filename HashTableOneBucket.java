@@ -1,16 +1,29 @@
 import java.io.PrintStream;
 
 public class HashTableOneBucket implements HashTable {
+    public HashFunction hashFunction;
     public int tableSize;
     public int table[];
 
-    public HashTableOneBucket(int hashFunction, int _tableSize, int collisionResolver) {
+    public HashTableOneBucket(HashFunction _hashFunction, int _tableSize, int collisionResolver)
+    {
+        hashFunction = _hashFunction;
         tableSize = _tableSize;
         table = new int[_tableSize];
         for (int i = 0; i < _tableSize; ++i) {
             table[i] = -1;
         }
     }
+
+    public void put(int data) {
+        // Get the hash value
+        int hash = hashFunction.hash(data);
+        // Limit its size
+        hash = hash % tableSize;
+        // Resolve collisions:  TBD
+        table[hash] = data;
+    }
+
 
 
 
