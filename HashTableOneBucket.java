@@ -4,6 +4,7 @@ public class HashTableOneBucket implements HashTable {
     public HashFunction hashFunction;
     public int tableSize;
     public int table[];
+    public int numCollisions = 0;
 
     public HashTableOneBucket(HashFunction _hashFunction, int _tableSize, int collisionResolver)
     {
@@ -19,12 +20,18 @@ public class HashTableOneBucket implements HashTable {
         // Get the hash value
         int hash = hashFunction.hash(data);
         // Limit its size
-        hash = hash % tableSize;
-        // Resolve collisions:  TBD
-        table[hash] = data;
+        int slot = hash % tableSize;
+        // Resolve collisions
+        while (table[slot] != -1) {
+            numCollisions++;
+            slot++;
+        }
+        table[slot] = data;
     }
 
-
+    public int getNumCollisions() {
+        return numCollisions;
+    }
 
 
     public void insertLinearProbe(int key, int tableSize) {

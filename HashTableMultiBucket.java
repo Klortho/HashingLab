@@ -6,6 +6,7 @@ public class HashTableMultiBucket implements HashTable {
     public int bucketsPerSlot;
     public int numSlots;
     public HashTableSlot table[];
+    public int numCollisions = 0;
 
     public HashTableMultiBucket(HashFunction _hashFunction, int _tableSize, int _bucketsPerSlot,
                                 int collisionResolver)
@@ -21,6 +22,10 @@ public class HashTableMultiBucket implements HashTable {
     }
 
     public void put(int i) {
+    }
+
+    public int getNumCollisions() {
+        return numCollisions;
     }
 
 

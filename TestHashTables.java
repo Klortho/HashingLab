@@ -26,7 +26,7 @@ public class TestHashTables {
             System.err.println(ioe.toString());
             return;
         }
-        System.out.println("Read in " + testdata.size() + " test data entries.");
+        System.out.println("Number of test data items = " + testdata.size() + "\n");
 
 
         run_tests("Division module 120, 120 slots, 1 bucket / slot, linear probing",
@@ -44,5 +44,6 @@ public class TestHashTables {
         }
 
         table.print(System.out);
+        System.out.println("\nNumber of collisions:  " + table.getNumCollisions());
     }
 }
