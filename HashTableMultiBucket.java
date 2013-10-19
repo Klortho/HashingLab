@@ -6,10 +6,11 @@ public class HashTableMultiBucket implements HashTable {
     private int bucketsPerSlot;
     private int numSlots;
     private HashTableSlot table[];
+    private CollisionResolver collisionResolver;
     private int numCollisions = 0;
 
     public HashTableMultiBucket(HashFunction _hashFunction, int _tableSize, int _bucketsPerSlot,
-                                int collisionResolver)
+                                CollisionResolver _collisionResolver)
     {
         hashFunction = _hashFunction;
         tableSize = _tableSize;
@@ -19,6 +20,8 @@ public class HashTableMultiBucket implements HashTable {
         for (int i = 0; i < _tableSize; ++i) {
             table[i] = new HashTableSlot(_bucketsPerSlot);
         }
+        collisionResolver = _collisionResolver;
+        collisionResolver.setTable(this);
     }
 
     public int getTableSize() {
@@ -29,7 +32,34 @@ public class HashTableMultiBucket implements HashTable {
         return numSlots;
     }
 
-    public void put(int i) {
+    public boolean slotFull(int i) {
+        // A slot is full iff all of the buckets in that slot are full
+        HashTableSlot s = table[i];
+        for (int b = 0; b < bucketsPerSlot; ++b) {
+            if (s.buckets[b] == -1) return false;
+            // Every time we encounter a non-empty bucket, that's a collision
+            numCollisions++;
+        }
+        return true;
+    }
+
+    public void put(int data) {
+        // Get the hash value
+        int hash = hashFunction.hash(data);
+        // Limit its size
+        int startSlot = hash % tableSize;
+
+        // Resolve collisions
+        int finalSlot = collisionResolver.findFreeSlot(startSlot);
+        HashTableSlot s = table[finalSlot];
+
+        // Insert the data into the first free bucket in this slot
+        for (int b = 0; b < bucketsPerSlot; ++b) {
+            if (s.buckets[b] == -1) {
+                s.buckets[b] = data;
+                return;
+            }
+        }
     }
 
     public int getNumCollisions() {

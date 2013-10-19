@@ -37,22 +37,22 @@ public class TestHashTables {
         //run_tests("Division module 120, 120 slots, 1 bucket / slot, in-table chaining",
         //          new HashTableOneBucket(HashFunction.div_mod_120, 120, 2));
 
-//        run_tests("Division module 127, 120 slots, 1 bucket / slot, linear probing",
-//                  new HashTableOneBucket(HashFunction.div_mod_127, 120, 0));
+        run_tests("Division module 127, 120 slots, 1 bucket / slot, linear probing",
+                  new HashTableOneBucket(HashFunction.div_mod_127, 120, linear));
         //run_tests("Division module 127, 120 slots, 1 bucket / slot, quadratic probing",
         //          new HashTableOneBucket(HashFunction.div_mod_127, 120, 1));
         //run_tests("Division module 127, 120 slots, 1 bucket / slot, in-table chaining",
         //          new HashTableOneBucket(HashFunction.div_mod_127, 120, 2));
 
-//        run_tests("Division module 41, 40 slots, 3 buckets / slot, linear probing",
-//                  new HashTableMultiBucket(HashFunction.div_mod_41, 40, 3, 0));
+        run_tests("Division module 41, 40 slots, 3 buckets / slot, linear probing",
+                  new HashTableMultiBucket(HashFunction.div_mod_41, 120, 3, linear));
         //run_tests("Division module 41, 40 slots, 3 buckets / slot, quadratic probing",
-        //          new HashTableMultiBucket(HashFunction.div_mod_41, 40, 3, 1));
+        //          new HashTableMultiBucket(HashFunction.div_mod_41, 120, 3, 1));
         //run_tests("Division module 41, 40 slots, 3 buckets / slot, in-table chaining",
-        //          new HashTableMultiBucket(HashFunction.div_mod_41, 40, 3, 2));
+        //          new HashTableMultiBucket(HashFunction.div_mod_41, 120, 3, 2));
 
-//        run_tests("Custom hash function, 120 slots, 1 bucket / slot, linear probing",
-//                  new HashTableOneBucket(HashFunction.custom, 120, 0));
+        run_tests("Custom hash function, 120 slots, 1 bucket / slot, linear probing",
+                  new HashTableOneBucket(HashFunction.custom, 120, linear));
         //run_tests("Custom hash function, 120 slots, 1 bucket / slot, quadratic probing",
         //          new HashTableOneBucket(HashFunction.custom, 120, 1));
         //run_tests("Custom hash function, 120 slots, 1 bucket / slot, in-table chaining",

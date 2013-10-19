@@ -3,7 +3,7 @@
   buckets per slot.
 */
 public class HashTableSlot {
-    int buckets[];        // value of -1 means no data
+    public int buckets[];        // value of -1 means no data
 
     public HashTableSlot(int bucketSize) {
         buckets = new int[bucketSize];

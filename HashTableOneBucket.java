@@ -4,8 +4,8 @@ public class HashTableOneBucket implements HashTable {
     private HashFunction hashFunction;
     private int tableSize;
     private int table[];
-    private int numCollisions = 0;
     private CollisionResolver collisionResolver;
+    private int numCollisions = 0;
 
     public HashTableOneBucket(HashFunction _hashFunction, int _tableSize, CollisionResolver _collisionResolver)
     {
