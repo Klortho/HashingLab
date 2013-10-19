@@ -20,7 +20,10 @@ public interface HashFunction {
             return data % 41;
         }
     };
-    public static HashFunction div_mod_custom = new HashFunction() {
+
+    // FIXME:  Right now this just returns the data as-is -- definitely
+    // will want something more interesting.
+    public static HashFunction custom = new HashFunction() {
         public int hash(int data) {
             return data;
         }
