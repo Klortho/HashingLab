@@ -28,6 +28,9 @@ public class HashTableOneBucket implements HashTable {
     }
 
     public boolean slotFull(int i) {
+        // Every time we return true, that constitutes a collision
+        if (table[i] != -1) numCollisions++;
+
         return table[i] != -1;
     }
 
@@ -45,8 +48,6 @@ public class HashTableOneBucket implements HashTable {
     public int getNumCollisions() {
         return numCollisions;
     }
-
-
 
     /**
       In the cases where we have one bucket / slot, we are supposed to print the table
